@@ -27,55 +27,7 @@
                 <p style="margin-bottom: 20px;">This calculator helps determine if your proposal meets the statutory threshold for fee recovery.</p>
             </div>
 
-            <!-- Reverse Calculator -->
-            <div class="calculator-box">
-                <h2 style="margin-bottom: 10px; color: #1e3a5f;">Judgment Calculator</h2>
-                <p style="margin-bottom: 20px; color: #666;">Calculate judgment needed to trigger fees from a proposal amount.</p>
-                <form id="reverseForm">
-                    <div class="form-group">
-                        <label>Who is making the proposal?</label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="reverseProposalType" value="plaintiff" required>
-                                <span>Plaintiff</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="reverseProposalType" value="defendant" required>
-                                <span>Defendant</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reverseProposalAmount">Proposal Amount ($)</label>
-                        <input type="text" id="reverseProposalAmount" required placeholder="$100,000.00">
-                    </div>
-
-                    <button type="submit" class="calculate-btn">Calculate Required Judgment</button>
-                </form>
-
-                <div id="reverseResults" class="results hidden">
-                    <!-- Results will appear here -->
-                </div>
-            </div>
-
-            <!-- Ad Placement -->
-            <div class="ad-container">
-                <p class="ad-label">Advertisement</p>
-                <div id="ad-slot-1">
-                    <!-- Ad1 -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-9125889511214710"
-                         data-ad-slot="8203590277"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-
+            <!-- Proposal Calulator -->
             <div class="calculator-box">
                 <h2 style="margin-bottom: 10px; color: #1e3a5f;">Proposal Calculator</h2>
                 <p style="margin-bottom: 20px; color: #666;">Calculate a proposal amount based on an expected judgment.</p>
@@ -104,6 +56,55 @@
                 </form>
             
                 <div id="strategicResults" class="results hidden">
+                    <!-- Results will appear here -->
+                </div>
+            </div>
+            
+            <!-- Ad Placement -->
+            <div class="ad-container">
+                <p class="ad-label">Advertisement</p>
+                <div id="ad-slot-1">
+                    <!-- Ad1 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9125889511214710"
+                         data-ad-slot="8203590277"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+            
+            <!-- Judgment Calculator -->
+            <div class="calculator-box">
+                <h2 style="margin-bottom: 10px; color: #1e3a5f;">Judgment Calculator</h2>
+                <p style="margin-bottom: 20px; color: #666;">Calculate judgment needed to trigger fees from a proposal amount.</p>
+                <form id="reverseForm">
+                    <div class="form-group">
+                        <label>Who is making the proposal?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="reverseProposalType" value="plaintiff" required>
+                                <span>Plaintiff</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reverseProposalType" value="defendant" required>
+                                <span>Defendant</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reverseProposalAmount">Proposal Amount ($)</label>
+                        <input type="text" id="reverseProposalAmount" required placeholder="$100,000.00">
+                    </div>
+
+                    <button type="submit" class="calculate-btn">Calculate Required Judgment</button>
+                </form>
+
+                <div id="reverseResults" class="results hidden">
                     <!-- Results will appear here -->
                 </div>
             </div>
