@@ -77,6 +77,38 @@
             </div>
 
             <div class="calculator-box">
+                <h2 style="margin-bottom: 10px; color: #1e3a5f;">Strategic Proposal Calculator</h2>
+                <p style="margin-bottom: 20px; color: #666;">Calculate what proposal amount to make based on your expected judgment.</p>
+                
+                <form id="strategicForm">
+                    <div class="form-group">
+                        <label>Who will make the proposal?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="strategicProposalType" value="plaintiff" required>
+                                <span>Plaintiff</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="strategicProposalType" value="defendant" required>
+                                <span>Defendant</span>
+                            </label>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="expectedJudgment">Expected Judgment Amount ($)</label>
+                        <input type="text" id="expectedJudgment" required placeholder="$200,000.00">
+                    </div>
+            
+                    <button type="submit" class="calculate-btn">Calculate Proposal Amount</button>
+                </form>
+            
+                <div id="strategicResults" class="results hidden">
+                    <!-- Results will appear here -->
+                </div>
+            </div>
+
+            <div class="calculator-box">
                 <p style="margin-bottom: 20px;">Already have a judgment? See if a proposal was effective.</p>
                 <form id="pfsForm">
                     <div class="form-group">
