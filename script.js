@@ -194,3 +194,74 @@ document.getElementById('judgmentAmount').addEventListener('focus', function(e) 
 document.getElementById('reverseProposalAmount').addEventListener('focus', function(e) {
     e.target.value = e.target.value.replace(/[^0-9.]/g, '');
 });
+
+// Format expectedJudgment input
+document.getElementById('expectedJudgment').addEventListener('blur', function(e) {
+    formatCurrencyInput(e.target);
+});
+
+document.getElementById('expectedJudgment').addEventListener('focus', function(e) {
+    e.target.value = e.target.value.replace(/[^0-9.]/g, '');
+});
+
+// Strategic Calculator
+document.getElementById('strategicForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const proposalType = document.querySelector('input[name="strategicProposalType"]:checked').value;
+    const expectedJudgment = parseCurrencyInput(document.getElementById('expectedJudgment').value);
+
+    const results = calculateStrategicProposal(proposalType, expectedJudgment);
+    displayStrategicResults(results);
+});
+
+function calculateStrategicProposal(proposalType, expectedJudgment) {
+    let proposalAmount, description;
+
+    if (proposalType === 'plaintiff') {
+        // Plaintiff: J >= P * 1.25, so P <= J / 1.25
+        proposalAmount = expectedJudgment / 1.25;
+        description = `To make a judgment of ${formatCurrency(expectedJudgment)} meet the 25% threshold, you should propose ${formatCurrency(proposalAmount)} or less.`;
+
+        return {
+            type: 'Plaintiff',
+            expectedJudgment: expectedJudgment,
+            proposalAmount: proposalAmount,
+            description: description,
+            range: `Any proposal of ${formatCurrency(proposalAmount)} or lower will meet the threshold if the judgment is ${formatCurrency(expectedJudgment)}.`
+        };
+
+    } else { // defendant
+        // Defendant: J <= P * 0.75, so P >= J / 0.75
+        proposalAmount = expectedJudgment / 0.75;
+        description = `To make a judgment of ${formatCurrency(expectedJudgment)} meet the 25% threshold, you should propose ${formatCurrency(proposalAmount)} or more.`;
+
+        return {
+            type: 'Defendant',
+            expectedJudgment: expectedJudgment,
+            proposalAmount: proposalAmount,
+            description: description,
+            range: `Any proposal of ${formatCurrency(proposalAmount)} or higher will meet the threshold if the judgment is ${formatCurrency(expectedJudgment)}.`
+        };
+    }
+}
+
+function displayStrategicResults(results) {
+    const resultsDiv = document.getElementById('strategicResults');
+
+    const direction = results.type === 'Plaintiff' ? 'at most' : 'at least';
+
+    resultsDiv.innerHTML = `
+        <h3>📊 Recommended Proposal Amount</h3>
+        <p><strong>Expected Judgment:</strong> ${formatCurrency(results.expectedJudgment)}</p>
+        <div style="background: white; padding: 20px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #2c5f8d;">
+            <p style="font-size: 1.2rem; font-weight: 600; color: #1e3a5f; margin-bottom: 10px;">
+                Propose ${direction}: ${formatCurrency(results.proposalAmount)}
+            </p>
+        </div>
+        <p>${results.description}</p>
+        <p style="margin-top: 15px;"><strong>Note:</strong> ${results.range}</p>
+    `;
+
+    resultsDiv.className = 'results success';
+}
