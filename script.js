@@ -208,7 +208,11 @@ document.getElementById('expectedJudgment').addEventListener('focus', function(e
 document.getElementById('strategicForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const proposalType = document.querySelector('input[name="strategicProposalType"]:checked').value;
+    const proposalTypeElement = document.querySelector('input[name="strategicProposalType"]:checked');
+    if (!proposalTypeElement) {
+        return;
+    }
+    const proposalType = proposalTypeElement.value;
     const expectedJudgment = parseCurrencyInput(document.getElementById('expectedJudgment').value);
 
     const results = calculateStrategicProposal(proposalType, expectedJudgment);
