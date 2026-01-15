@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florida Proposal for Settlement Calculator | 768.79</title>
+    <meta name="description" content="Free calculator for Florida Statute 768.79 proposal for settlement attorney's fees. Determine if your proposal meets the 25% threshold.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Florida Proposal for Settlement Calculator</h1>
+            <p class="subtitle">Calculate attorneys' fees eligibility under Florida Statute § 768.79</p>
+        </header>
+
+        <main>
+            <div class="info-section">
+                <h2>How It Works</h2>
+                <p><a href="https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&Search_String=&URL=0700-0799/0768/Sections/0768.79.html" target="_blank" rel="noopener noreferrer">Florida Statute § 768.79</a> allows the party making a proposal for settlement to recover attorney's fees if the final judgment meets certain thresholds:</p>
+                <ul>
+                    <li><strong>Plaintiff's Proposal:</strong> Final judgment must be at least 25% MORE than the proposal amount</li>
+                    <li><strong>Defendant's Proposal:</strong> Final judgment must be at least 25% LESS than the proposal amount</li>
+                </ul>
+                <p style="margin-bottom: 20px;">This calculator helps determine if your proposal meets the statutory threshold for fee recovery.</p>
+            </div>
+
+            <!-- Reverse Calculator -->
+            <div class="calculator-box">
+                <p style="margin-bottom: 20px;">Calculate your proposal.</p>
+
+                <form id="reverseForm">
+                    <div class="form-group">
+                        <label>Who is making the proposal?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="reverseProposalType" value="plaintiff" required>
+                                <span>Plaintiff</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reverseProposalType" value="defendant" required>
+                                <span>Defendant</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reverseProposalAmount">Proposal Amount ($)</label>
+                        <input type="text" id="reverseProposalAmount" required placeholder="$100,000.00">
+                    </div>
+
+                    <button type="submit" class="calculate-btn">Calculate Required Judgment</button>
+                </form>
+
+                <div id="reverseResults" class="results hidden">
+                    <!-- Results will appear here -->
+                </div>
+            </div>
+
+            <!-- Ad Placement -->
+            <div class="ad-container">
+                <p class="ad-label">Advertisement</p>
+                <div id="ad-slot-1">
+                    <!-- Google AdSense code goes here -->
+                </div>
+            </div>
+
+            <div class="calculator-box">
+                <p style="margin-bottom: 20px;">Already have a judgment? See if a proposal was effective.</p>
+                <form id="pfsForm">
+                    <div class="form-group">
+                        <label>Who made the proposal?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="proposalType" value="plaintiff" required>
+                                <span>Plaintiff</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="proposalType" value="defendant" required>
+                                <span>Defendant</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="proposalAmount">Proposal Amount ($)</label>
+                        <input type="text" id="proposalAmount" required placeholder="$100,000.00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="judgmentAmount">Final Judgment Amount ($)</label>
+                        <input type="text" id="judgmentAmount" required placeholder="$150,000.00">
+                    </div>
+
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+
+                <div id="results" class="results hidden">
+                    <!-- Results will appear here -->
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            <div class="support-section">
+                <p>Find this tool helpful?</p>
+                <a href="https://www.buymeacoffee.com/ctibs" target="_blank" rel="noopener noreferrer" class="coffee-btn">
+                    ☕ Buy Me a Coffee
+                </a>
+            </div>
+
+           <div class="disclaimer">
+                <h3>⚠️ Important Disclaimer</h3>
+                <p><strong>This calculator is for informational purposes only and does not constitute legal advice.</strong> The calculations provided are estimates based on Florida Statute § 768.79 as understood at the time of creation. Users should:</p>
+                <ul>
+                    <li>Verify all calculations independently</li>
+                    <li>Consult the current version of <a href="https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&Search_String=&URL=0700-0799/0768/Sections/0768.79.html" target="_blank" rel="noopener noreferrer">Florida Statute § 768.79</a></li>
+                    <li>Review relevant case law and procedural rules</li>
+                    <li>Seek advice from qualified legal counsel</li>
+                </ul>
+                <p>The creator of this tool is not your attorney and use of this calculator does not create an attorney-client relationship.</p>
+            </div>
+            <p class="copyright">&copy; 2025 PFS Calculator | Created by a Florida Attorney</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
