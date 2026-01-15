@@ -24,15 +24,15 @@ body {
 }
 
 header {
-    background: #f0f4f8;
-    color: #1e3a5f;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+    color: white;
     padding: 50px 30px;
     text-align: center;
-    border-bottom: 3px solid #2c5f8d;
+    border-bottom: 3px solid #d4af37;
 }
 
 h1 {
-    color: #1e3a5f;
+    color: white;
     font-family: 'Montserrat', sans-serif;
     font-size: 3rem;
     font-weight: 900;
@@ -43,7 +43,7 @@ h1 {
 }
 
 .subtitle {
-    color: #2c5f8d;
+    color: #f0f4f8;
     font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
@@ -53,7 +53,55 @@ h1 {
 }
 
 .subtitle a {
-    color: #1e3a5f;
+    color: white;
+}
+
+.nav-bar {
+    background: #2c5282;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.support-link {
+    background: #d4af37;
+    color: #1a2332;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+}
+
+.support-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    color: #1a2332;
+    text-decoration: none;
 }
 
 main {
@@ -175,6 +223,23 @@ footer {
     background: #f8f9fa;
     padding: 30px;
     border-top: 1px solid #e0e0e0;
+}
+
+.footer-links {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.footer-links a {
+    color: #2c5282;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
 }
 
 .disclaimer {
@@ -343,5 +408,22 @@ header a:hover {
 
     .calculator-box {
         padding: 20px;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .support-link {
+        width: 100%;
+        text-align: center;
     }
 }
