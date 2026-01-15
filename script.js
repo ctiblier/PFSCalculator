@@ -1,3 +1,4 @@
+console.log('Script loaded');
 document.getElementById('pfsForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -204,6 +205,7 @@ document.getElementById('expectedJudgment').addEventListener('focus', function(e
     e.target.value = e.target.value.replace(/[^0-9.]/g, '');
 });
 
+console.log('About to register strategic form listener');
 // Strategic Calculator
 document.getElementById('strategicForm').addEventListener('submit', function(e) {
     e.preventDefault();
