@@ -71,6 +71,9 @@ function displayResults(results) {
     <p><strong>Required Threshold:</strong> ${formatCurrency(results.threshold)}</p>
     <p><strong>Percent Difference:</strong> ${Math.abs(results.percentDifference).toFixed(2)}%</p>
     <p>${results.explanation}</p>
+    ${!results.meetsThreshold && Math.abs(results.percentDifference).toFixed(2) === '25.00' ? 
+        '<p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; font-size: 0.9rem;"><strong>Note on Rounding:</strong> While the percentage difference rounds to 25.00%, the statute requires the judgment dollar amount to meet the threshold. Due to rounding precision, the actual judgment amount does not satisfy the "at least 25 percent" requirement specified in § 768.79.</p>' 
+        : ''}
     ${results.meetsThreshold ? '<p><strong>Result:</strong> The proposing party may be entitled to recover attorney\'s fees under § 768.79.</p>' : '<p><strong>Result:</strong> The proposing party is not entitled to recover attorney\'s fees under § 768.79.</p>'}
     `;
 
