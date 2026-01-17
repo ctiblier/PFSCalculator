@@ -1,10 +1,8 @@
-console.log('Script loaded');
 document.getElementById('pfsForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const proposalTypeElement = document.querySelector('input[name="proposalType"]:checked');
     if (!proposalTypeElement) {
-        alert('Please select who made the proposal');
         return;
     }
     const proposalType = proposalTypeElement.value;
@@ -93,7 +91,6 @@ document.getElementById('reverseForm').addEventListener('submit', function(e) {
 
     const proposalTypeElement = document.querySelector('input[name="reverseProposalType"]:checked');
     if (!proposalTypeElement) {
-        alert('Please select who made the proposal');
         return;
     }
     const proposalType = proposalTypeElement.value;
@@ -205,15 +202,12 @@ document.getElementById('expectedJudgment').addEventListener('focus', function(e
     e.target.value = e.target.value.replace(/[^0-9.]/g, '');
 });
 
-console.log('About to register strategic form listener');
 // Strategic Calculator
 document.getElementById('strategicForm').addEventListener('submit', function(e) {
-    console.log('Strategic form submitted!');
     e.preventDefault();
     
     const proposalTypeElement = document.querySelector('input[name="strategicProposalType"]:checked');
     if (!proposalTypeElement) {
-        console.log('No proposal type selected');
         return;
     }
     const proposalType = proposalTypeElement.value;
