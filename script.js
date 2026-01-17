@@ -208,15 +208,23 @@ document.getElementById('expectedJudgment').addEventListener('focus', function(e
 console.log('About to register strategic form listener');
 // Strategic Calculator
 document.getElementById('strategicForm').addEventListener('submit', function(e) {
+    console.log('Strategic form submitted!');
     e.preventDefault();
-
+    
     const proposalTypeElement = document.querySelector('input[name="strategicProposalType"]:checked');
     if (!proposalTypeElement) {
+        console.log('No proposal type selected');
         return;
     }
     const proposalType = proposalTypeElement.value;
     const expectedJudgment = parseCurrencyInput(document.getElementById('expectedJudgment').value);
-
+    
+    // Validation
+    if (expectedJudgment <= 0) {
+        alert('Please enter a positive judgment amount');
+        return;
+    }
+    
     const results = calculateStrategicProposal(proposalType, expectedJudgment);
     displayStrategicResults(results);
 });
@@ -267,6 +275,9 @@ function displayStrategicResults(results) {
         </div>
         <p>${results.description}</p>
         <p style="margin-top: 15px;"><strong>Note:</strong> ${results.range}</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #666; font-style: italic;">
+            <strong>Safety Buffer:</strong> This calculation includes a $1 safety buffer to account for rounding. The actual threshold calculation may vary based on how the court rounds. Always verify with counsel and review relevant case law.
+        </p>
     `;
 
     resultsDiv.className = 'results success';
