@@ -32,8 +32,8 @@ function calculatePFS(proposalType, proposalAmount, judgmentAmount) {
             percentDifference: percentDifference,
             meetsThreshold: meetsThreshold,
             explanation: meetsThreshold
-            ? `The judgment of ${formatCurrency(judgmentAmount)} is ${percentDifference.toFixed(2)}% more than the proposal of ${formatCurrency(proposalAmount)}, which exceeds the required 25% threshold.`
-            : `The judgment of ${formatCurrency(judgmentAmount)} is only ${percentDifference.toFixed(2)}% more than the proposal of ${formatCurrency(proposalAmount)}, which does not meet the required 25% threshold.`
+            ? `The judgment of ${formatCurrency(judgmentAmount)} is ${percentDifference.toFixed(2)}% more than the proposal of ${formatCurrency(proposalAmount)}, which meets the required 25% threshold.`
+            : `The judgment of ${formatCurrency(judgmentAmount)} must be ${formatCurrency(threshold)} or more (25% more than the proposal) to meet the threshold. The actual difference of ${percentDifference.toFixed(2)}% does not satisfy this requirement.`
         };
 
     } else { // defendant
@@ -42,7 +42,7 @@ function calculatePFS(proposalType, proposalAmount, judgmentAmount) {
         difference = proposalAmount - judgmentAmount;
         percentDifference = (difference / proposalAmount) * 100;
         meetsThreshold = judgmentAmount <= threshold;
-
+    
         return {
             type: 'Defendant',
             proposalAmount: proposalAmount,
@@ -52,8 +52,8 @@ function calculatePFS(proposalType, proposalAmount, judgmentAmount) {
             percentDifference: percentDifference,
             meetsThreshold: meetsThreshold,
             explanation: meetsThreshold
-            ? `The judgment of ${formatCurrency(judgmentAmount)} is ${percentDifference.toFixed(2)}% less than the proposal of ${formatCurrency(proposalAmount)}, which exceeds the required 25% threshold.`
-            : `The judgment of ${formatCurrency(judgmentAmount)} is only ${percentDifference.toFixed(2)}% less than the proposal of ${formatCurrency(proposalAmount)}, which does not meet the required 25% threshold.`
+            ? `The judgment of ${formatCurrency(judgmentAmount)} is ${percentDifference.toFixed(2)}% less than the proposal of ${formatCurrency(proposalAmount)}, which meets the required 25% threshold.`
+            : `The judgment of ${formatCurrency(judgmentAmount)} must be ${formatCurrency(threshold)} or less (25% less than the proposal) to meet the threshold. The actual difference of ${percentDifference.toFixed(2)}% does not satisfy this requirement.`
         };
     }
 }
