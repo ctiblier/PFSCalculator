@@ -64,14 +64,17 @@ function displayResults(results) {
     const resultClass = results.meetsThreshold ? 'success' : 'failure';
     const resultText = results.meetsThreshold ? '✅ Threshold MET' : '❌ Threshold NOT Met';
 
+    const percentRounded = Math.abs(results.percentDifference).toFixed(2);
+    const showRoundingWarning = !results.meetsThreshold && (percentRounded === '25.00' || Math.abs(percentRounded - 25.0) < 0.01);
+
     resultsDiv.innerHTML = `
     <h3>${resultText}</h3>
     <p><strong>${results.type}'s Proposal:</strong> ${formatCurrency(results.proposalAmount)}</p>
     <p><strong>Final Judgment:</strong> ${formatCurrency(results.judgmentAmount)}</p>
     <p><strong>Required Threshold:</strong> ${formatCurrency(results.threshold)}</p>
-    <p><strong>Percent Difference:</strong> ${Math.abs(results.percentDifference).toFixed(2)}%</p>
+    <p><strong>Percent Difference:</strong> ${percentRounded}%</p>
     <p>${results.explanation}</p>
-    ${!results.meetsThreshold && Math.abs(results.percentDifference).toFixed(2) === '25.00' ? 
+    ${showRoundingWarning ? 
         '<p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; font-size: 0.9rem;"><strong>Note on Rounding:</strong> While the percentage difference rounds to 25.00%, the statute requires the judgment dollar amount to meet the threshold. Due to rounding precision, the actual judgment amount does not satisfy the "at least 25 percent" requirement specified in § 768.79.</p>' 
         : ''}
     ${results.meetsThreshold ? '<p><strong>Result:</strong> The proposing party may be entitled to recover attorney\'s fees under § 768.79.</p>' : '<p><strong>Result:</strong> The proposing party is not entitled to recover attorney\'s fees under § 768.79.</p>'}
