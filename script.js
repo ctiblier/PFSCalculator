@@ -231,10 +231,12 @@ document.getElementById('strategicForm').addEventListener('submit', function(e) 
 
 function calculateStrategicProposal(proposalType, expectedJudgment) {
     let proposalAmount, description;
+    const safetyMargin = 1; // $1 buffer for safety
 
     if (proposalType === 'plaintiff') {
         // Plaintiff: J >= P * 1.25, so P <= J / 1.25
-        proposalAmount = expectedJudgment / 1.25;
+        // Round DOWN and subtract $1 for safety
+        proposalAmount = Math.floor(expectedJudgment / 1.25) - safetyMargin;
         description = `To make a judgment of ${formatCurrency(expectedJudgment)} meet the 25% threshold, you should propose ${formatCurrency(proposalAmount)} or less.`;
 
         return {
@@ -247,7 +249,8 @@ function calculateStrategicProposal(proposalType, expectedJudgment) {
 
     } else { // defendant
         // Defendant: J <= P * 0.75, so P >= J / 0.75
-        proposalAmount = expectedJudgment / 0.75;
+        // Round UP and add $1 for safety
+        proposalAmount = Math.ceil(expectedJudgment / 0.75) + safetyMargin;
         description = `To make a judgment of ${formatCurrency(expectedJudgment)} meet the 25% threshold, you should propose ${formatCurrency(proposalAmount)} or more.`;
 
         return {
