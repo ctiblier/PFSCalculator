@@ -55,7 +55,7 @@ h1 {
 
 .nav-bar {
     background: #2c5282;
-    padding: 15px 30px;
+    padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -74,8 +74,8 @@ h1 {
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 0.95em;
-    padding: 8px 12px;
+    font-size: 0.9em;
+    padding: 5px 10px;
     border-radius: 4px;
     transition: background 0.3s;
     white-space: nowrap;
