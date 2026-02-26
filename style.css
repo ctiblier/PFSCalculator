@@ -138,7 +138,8 @@ input, select {
 }
 
 input:focus, select:focus {
-    outline: none;
+    outline: 2px solid #2c5f8d;
+    outline-offset: 2px;
     border-color: #2c5f8d;
 }
 

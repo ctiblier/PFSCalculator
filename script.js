@@ -220,10 +220,13 @@ document.getElementById('strategicForm').addEventListener('submit', function(e) 
     const expectedJudgment = parseCurrencyInput(document.getElementById('expectedJudgment').value);
     
     // Validation
+    const errorDiv = document.getElementById('strategicError');
     if (expectedJudgment <= 0) {
-        alert('Please enter a positive judgment amount');
+        errorDiv.textContent = 'Please enter a valid judgment amount greater than $0.';
+        errorDiv.style.display = 'block';
         return;
     }
+    errorDiv.style.display = 'none';
     
     const results = calculateStrategicProposal(proposalType, expectedJudgment);
     displayStrategicResults(results);
