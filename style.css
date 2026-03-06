@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600&display=swap');
 
 * {
 margin: 0;
@@ -26,9 +25,10 @@ box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;    line-height: 1.6;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;    line-height: 1.6;
     color: #333;
     background: #1a2332;
+    background-image: radial-gradient(ellipse at top, #1e2d40 0%, #1a2332 70%);
     min-height: 100vh;
     padding: 20px;
 }
@@ -38,7 +38,7 @@ body {
     margin: 0 auto;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.35), 0 8px 20px rgba(0,0,0,0.15);
     overflow: hidden;
 }
 
@@ -52,17 +52,17 @@ header {
 
 h1 {
     color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5em;
-    font-weight: 500;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 2.4em;
+    font-weight: 400;
     margin-bottom: 10px;
-    letter-spacing: 0.5px;
+    letter-spacing: -0.5px;
     line-height: 1.2;
 }
 
 .subtitle {
     color: #ffffff;
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 1.1rem;
     font-weight: 400;
 }
@@ -137,6 +137,7 @@ h1 {
 
 main {
     padding: 15px 30px 40px 30px;
+    counter-reset: calculator;
 }
 
 .calculator-box {
@@ -144,6 +145,15 @@ main {
     padding: 30px;
     border-radius: 8px;
     margin-bottom: 40px;
+    counter-increment: calculator;
+    position: relative;
+    animation: fadeInUp 0.5s ease-out both;
+    transition: box-shadow 0.3s ease;
+    border-top: 3px solid #d4af37;
+}
+
+.calculator-box:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .form-group {
@@ -177,13 +187,13 @@ input, select {
     border: 2px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
-    transition: border-color 0.3s;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input:focus, select:focus {
-    outline: 2px solid #2c5f8d;
-    outline-offset: 2px;
-    border-color: #2c5f8d;
+    outline: none;
+    border-color: #2c5282;
+    box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.15);
 }
 
 .form-error {
@@ -215,7 +225,8 @@ input:focus, select:focus {
 }
 
 .calculate-btn:active {
-    transform: translateY(0);
+    transform: translateY(1px);
+    box-shadow: 0 1px 4px rgba(30, 58, 95, 0.2);
 }
 
 .calculate-btn:focus-visible {
@@ -230,6 +241,7 @@ input:focus, select:focus {
     background: white;
     border-radius: 8px;
     border-left: 5px solid #2c5f8d;
+    animation: fadeInUp 0.3s ease-out;
 }
 
 .results.hidden {
@@ -306,20 +318,22 @@ footer {
 }
 
 .disclaimer {
-    background: #fff3cd;
-    border: 2px solid #ffc107;
+    background: #fef9e7;
+    border: 1px solid #d4af37;
+    border-left: 4px solid #d4af37;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
 }
 
 .disclaimer h3 {
-    color: #856404;
+    color: #8a6d0b;
     margin-bottom: 10px;
+    font-family: 'DM Serif Display', Georgia, serif;
 }
 
 .disclaimer p, .disclaimer ul {
-    color: #856404;
+    color: #6b5610;
     font-size: 0.9rem;
 }
 
@@ -340,7 +354,7 @@ footer {
 }
 .radio-group {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     margin-top: 10px;
 }
 
@@ -349,16 +363,45 @@ footer {
     align-items: center;
     cursor: pointer;
     font-weight: normal;
+    padding: 10px 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    flex: 1;
+    justify-content: center;
+}
+
+.radio-label:hover {
+    border-color: #2c5282;
+    background: #f0f4f8;
 }
 
 .radio-label input[type="radio"] {
-    width: auto;
-    margin-right: 8px;
-    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-label input[type="radio"]:checked + span {
+    color: #1e3a5f;
+    font-weight: 600;
+}
+
+.radio-label:has(input[type="radio"]:checked) {
+    border-color: #2c5282;
+    background: #e8eef6;
+    box-shadow: 0 0 0 1px #2c5282;
+}
+
+.radio-label:has(input[type="radio"]:focus-visible) {
+    outline: 3px solid #d4af37;
+    outline-offset: 2px;
 }
 
 .radio-label span {
     font-size: 16px;
+    user-select: none;
 }
 
 .ad-container {
@@ -379,15 +422,22 @@ footer {
 
 .calculator-box h2 {
     color: #1e3a5f;
+    font-family: 'DM Serif Display', Georgia, serif;
     font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 10px;
+    letter-spacing: -0.3px;
+}
+
+.calculator-box h2::before {
+    content: counter(calculator) ". ";
+    color: #d4af37;
 }
 
 .calculator-box > p:first-of-type {
-    color: #1e3a5f;
-    font-size: 1.1rem;
-    font-weight: 600;
+    color: #666;
+    font-size: 1rem;
+    font-weight: 400;
     margin-bottom: 25px;
 }
 
@@ -469,6 +519,7 @@ header a:hover {
     background: #f8f9fa;
     padding: 40px 30px;
     margin-top: 40px;
+    border-top: 3px solid #d4af37;
 }
 
 .seo-section-inner {
@@ -479,16 +530,21 @@ header a:hover {
 
 .seo-section h2 {
     color: #1e3a5f;
+    font-family: 'DM Serif Display', Georgia, serif;
     margin-bottom: 25px;
     font-size: 2rem;
     text-align: center;
+    letter-spacing: -0.3px;
 }
 
 .seo-section h3 {
     color: #2c5282;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
     margin-top: 30px;
     margin-bottom: 15px;
     font-size: 1.5rem;
+    letter-spacing: -0.2px;
 }
 
 .seo-section h4 {
@@ -540,6 +596,15 @@ header a:hover {
     margin-bottom: 8px;
     font-weight: 600;
     color: #1e3a5f;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.1rem;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.faq-question:first-child {
+    border-top: none;
+    padding-top: 0;
 }
 
 .faq-answer {
@@ -580,11 +645,13 @@ header a:hover {
 
 .page-content h2 {
     color: #1e3a5f;
+    font-family: 'DM Serif Display', Georgia, serif;
     font-size: 1.8rem;
     margin-top: 40px;
     margin-bottom: 15px;
     padding-bottom: 8px;
     border-bottom: 2px solid #e0e0e0;
+    letter-spacing: -0.3px;
 }
 
 .page-content h3 {
@@ -753,6 +820,17 @@ fieldset.form-group legend::after {
     color: #dc3545;
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -792,13 +870,13 @@ fieldset.form-group legend::after {
         text-align: center;
     }
 
-    .radio-label {
-        padding: 8px 12px;
-        min-height: 44px;
+    .radio-group {
+        flex-direction: row;
+        gap: 8px;
     }
 
-    .radio-group {
-        flex-direction: column;
-        gap: 8px;
+    .radio-label {
+        padding: 12px 16px;
+        min-height: 44px;
     }
 }
