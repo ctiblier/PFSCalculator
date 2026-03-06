@@ -3,11 +3,23 @@ document.getElementById('pfsForm').addEventListener('submit', function(e) {
 
     const proposalTypeElement = document.querySelector('input[name="proposalType"]:checked');
     if (!proposalTypeElement) {
+        const errorDiv = document.getElementById('pfsError');
+        errorDiv.textContent = 'Please select who made the proposal.';
+        errorDiv.style.display = 'block';
         return;
     }
+    const pfsErrorDiv = document.getElementById('pfsError');
+    pfsErrorDiv.style.display = 'none';
     const proposalType = proposalTypeElement.value;
     const proposalAmount = parseCurrencyInput(document.getElementById('proposalAmount').value);
     const judgmentAmount = parseCurrencyInput(document.getElementById('judgmentAmount').value);
+
+    if (proposalAmount <= 0 || judgmentAmount <= 0) {
+        const errorDiv = document.getElementById('pfsError');
+        errorDiv.textContent = 'Please enter valid amounts greater than $0.';
+        errorDiv.style.display = 'block';
+        return;
+    }
 
     const results = calculatePFS(proposalType, proposalAmount, judgmentAmount);
     displayResults(results);
@@ -74,8 +86,8 @@ function displayResults(results) {
     <p><strong>Required Threshold:</strong> ${formatCurrency(results.threshold)}</p>
     <p><strong>Percent Difference:</strong> ${percentRounded}%</p>
     <p>${results.explanation}</p>
-    ${showRoundingWarning ? 
-        '<p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; font-size: 0.9rem;"><strong>Note on Rounding:</strong> While the percentage difference rounds to 25.00%, the statute requires the judgment dollar amount to meet the threshold. Due to rounding precision, the actual judgment amount does not satisfy the "at least 25 percent" requirement specified in § 768.79.</p>' 
+    ${showRoundingWarning ?
+        '<p class="rounding-warning"><strong>Note on Rounding:</strong> While the percentage difference rounds to 25.00%, the statute requires the judgment dollar amount to meet the threshold. Due to rounding precision, the actual judgment amount does not satisfy the "at least 25 percent" requirement specified in § 768.79.</p>'
         : ''}
     ${results.meetsThreshold ? '<p><strong>Result:</strong> The proposing party may be entitled to recover attorney\'s fees under § 768.79.</p>' : '<p><strong>Result:</strong> The proposing party is not entitled to recover attorney\'s fees under § 768.79.</p>'}
     `;
@@ -97,10 +109,22 @@ document.getElementById('reverseForm').addEventListener('submit', function(e) {
 
     const proposalTypeElement = document.querySelector('input[name="reverseProposalType"]:checked');
     if (!proposalTypeElement) {
+        const errorDiv = document.getElementById('reverseError');
+        errorDiv.textContent = 'Please select who is making the proposal.';
+        errorDiv.style.display = 'block';
         return;
     }
+    const reverseErrorDiv = document.getElementById('reverseError');
+    reverseErrorDiv.style.display = 'none';
     const proposalType = proposalTypeElement.value;
     const proposalAmount = parseCurrencyInput(document.getElementById('reverseProposalAmount').value);
+
+    if (proposalAmount <= 0) {
+        const errorDiv = document.getElementById('reverseError');
+        errorDiv.textContent = 'Please enter a valid proposal amount greater than $0.';
+        errorDiv.style.display = 'block';
+        return;
+    }
 
     const results = calculateRequiredJudgment(proposalType, proposalAmount);
     displayReverseResults(results);
@@ -148,13 +172,13 @@ function displayReverseResults(results) {
     <h3>📊 Required Judgment Amount</h3>
     <p><strong>${results.type}'s Proposal:</strong> ${formatCurrency(results.proposalAmount)}</p>
     <p><strong>Required Threshold:</strong> ${results.threshold}</p>
-    <div style="background: white; padding: 20px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #2c5f8d;">
-    <p style="font-size: 1.2rem; font-weight: 600; color: #1e3a5f; margin-bottom: 10px;">
+    <div class="result-highlight">
+    <p>
     Judgment must be ${direction}: ${formatCurrency(results.requiredJudgment)}
     </p>
     </div>
     <p>${results.description}</p>
-    <p style="margin-top: 15px;"><strong>Note:</strong> ${results.range}</p>
+    <p class="result-note"><strong>Note:</strong> ${results.range}</p>
     `;
 
     resultsDiv.className = 'results success';
@@ -214,6 +238,9 @@ document.getElementById('strategicForm').addEventListener('submit', function(e) 
     
     const proposalTypeElement = document.querySelector('input[name="strategicProposalType"]:checked');
     if (!proposalTypeElement) {
+        const errorDiv = document.getElementById('strategicError');
+        errorDiv.textContent = 'Please select who will make the proposal.';
+        errorDiv.style.display = 'block';
         return;
     }
     const proposalType = proposalTypeElement.value;
@@ -274,14 +301,14 @@ function displayStrategicResults(results) {
     resultsDiv.innerHTML = `
         <h3>📊 Recommended Proposal Amount</h3>
         <p><strong>Expected Judgment:</strong> ${formatCurrency(results.expectedJudgment)}</p>
-        <div style="background: white; padding: 20px; border-radius: 6px; margin: 15px 0; border-left: 5px solid #2c5f8d;">
-            <p style="font-size: 1.2rem; font-weight: 600; color: #1e3a5f; margin-bottom: 10px;">
+        <div class="result-highlight">
+            <p>
                 Propose ${direction}: ${formatCurrency(results.proposalAmount)}
             </p>
         </div>
         <p>${results.description}</p>
-        <p style="margin-top: 15px;"><strong>Note:</strong> ${results.range}</p>
-        <p style="margin-top: 15px; font-size: 0.9rem; color: #666; font-style: italic;">
+        <p class="result-note"><strong>Note:</strong> ${results.range}</p>
+        <p class="result-safety-note">
             <strong>Safety Buffer:</strong> This calculation includes a $1 safety buffer to account for rounding. The actual threshold calculation may vary based on how the court rounds. Always verify with counsel and review relevant case law.
         </p>
     `;

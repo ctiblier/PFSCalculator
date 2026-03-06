@@ -11,7 +11,9 @@
       gtag('js', new Date());
       gtag('config', 'G-13349899672');
     </script>
-    
+    <!-- Umami Analytics -->
+    <script defer src="https://umami.ctibs.app/script.js" data-website-id="4c0a69a6-c6fa-42ca-a4bd-11651f6c79c7"></script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -119,6 +121,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="#main-content" class="skip-link">Skip to calculator</a>
         <header>
             <h1>Florida Proposal for Settlement Calculator</h1>
             <p class="subtitle">Calculate 768.79 fee thresholds for Florida attorneys</p>
@@ -131,23 +134,23 @@
                 <a href="/privacy-policy.html">Privacy Policy</a>
                 <a href="/terms-of-service.html">Terms</a>
             </div>
-            <a href="https://www.buymeacoffee.com/ctibs" target="_blank" rel="noopener noreferrer" class="support-link">&#9749; Buy Me a Coffee</a>
+            <a href="https://www.buymeacoffee.com/ctibs" target="_blank" rel="noopener noreferrer" class="support-link"><span aria-hidden="true">&#9749;</span> Buy Me a Coffee</a>
         </div>
 
-        <main>
+        <main id="main-content">
             <!-- Brief Intro -->
-            <p style="text-align: center; font-size: 1.1rem; color: #555; margin-bottom: 30px; line-height: 1.6; padding: 0 20px;">
-                Calculate attorney's fees eligibility under <a href="https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&Search_String=&URL=0700-0799/0768/Sections/0768.79.html" target="_blank" rel="noopener noreferrer" style="color: #2c5282;">Florida Statute § 768.79</a>. Determine if your proposal for settlement meets the 25% threshold for fee recovery.
+            <p class="intro-text">
+                Calculate attorney's fees eligibility under <a href="https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&Search_String=&URL=0700-0799/0768/Sections/0768.79.html" target="_blank" rel="noopener noreferrer">Florida Statute § 768.79</a>. Determine if your proposal for settlement meets the 25% threshold for fee recovery.
             </p>
 
             <!-- Proposal Calulator -->
             <div class="calculator-box">
-                <h2 style="margin-bottom: 10px; color: #1e3a5f;">Proposal Calculator</h2>
-                <p style="margin-bottom: 20px; color: #666;">Calculate a proposal amount based on an expected judgment.</p>
+                <h2>Proposal Calculator</h2>
+                <p>Calculate a proposal amount based on an expected judgment.</p>
                 
                 <form id="strategicForm">
-                    <div class="form-group">
-                        <label>Who will make the proposal?</label>
+                    <fieldset class="form-group">
+                        <legend>Who will make the proposal?</legend>
                         <div class="radio-group">
                             <label class="radio-label">
                                 <input type="radio" name="strategicProposalType" value="plaintiff" required>
@@ -158,18 +161,18 @@
                                 <span>Defendant</span>
                             </label>
                         </div>
-                    </div>
+                    </fieldset>
             
                     <div class="form-group">
                         <label for="expectedJudgment">Expected Judgment Amount ($)</label>
-                        <input type="text" id="expectedJudgment" required placeholder="$200,000.00">
+                        <input type="text" id="expectedJudgment" required placeholder="$200,000.00" aria-describedby="strategicError">
                     </div>
             
                     <button type="submit" class="calculate-btn">Calculate Proposal Amount</button>
-                    <div id="strategicError" style="display:none; margin-top: 10px; padding: 10px 15px; background: #f8d7da; border-left: 3px solid #dc3545; border-radius: 4px; color: #721c24; font-size: 0.9rem;"></div>
+                    <div id="strategicError" class="form-error" role="alert" style="display:none;"></div>
                 </form>
             
-                <div id="strategicResults" class="results hidden">
+                <div id="strategicResults" class="results hidden" aria-live="polite" role="region" aria-label="Proposal calculator results">
                     <!-- Results will appear here -->
                 </div>
             </div>
@@ -189,11 +192,11 @@
             
             <!-- Judgment Calculator -->
             <div class="calculator-box">
-                <h2 style="margin-bottom: 10px; color: #1e3a5f;">Judgment Calculator</h2>
-                <p style="margin-bottom: 20px; color: #666;">Calculate judgment needed to trigger fees from a proposal amount.</p>
+                <h2>Judgment Calculator</h2>
+                <p>Calculate judgment needed to trigger fees from a proposal amount.</p>
                 <form id="reverseForm">
-                    <div class="form-group">
-                        <label>Who is making the proposal?</label>
+                    <fieldset class="form-group">
+                        <legend>Who is making the proposal?</legend>
                         <div class="radio-group">
                             <label class="radio-label">
                                 <input type="radio" name="reverseProposalType" value="plaintiff" required>
@@ -204,17 +207,18 @@
                                 <span>Defendant</span>
                             </label>
                         </div>
-                    </div>
+                    </fieldset>
 
                     <div class="form-group">
                         <label for="reverseProposalAmount">Proposal Amount ($)</label>
-                        <input type="text" id="reverseProposalAmount" required placeholder="$100,000.00">
+                        <input type="text" id="reverseProposalAmount" required placeholder="$100,000.00" aria-describedby="reverseError">
                     </div>
 
                     <button type="submit" class="calculate-btn">Calculate Required Judgment</button>
+                    <div id="reverseError" class="form-error" role="alert" style="display:none;"></div>
                 </form>
 
-                <div id="reverseResults" class="results hidden">
+                <div id="reverseResults" class="results hidden" aria-live="polite" role="region" aria-label="Judgment calculator results">
                     <!-- Results will appear here -->
                 </div>
             </div>
@@ -233,11 +237,11 @@
             </div>
             
             <div class="calculator-box">
-                <h2 style="margin-bottom: 10px; color: #1e3a5f;">Post-Judgment Calculator</h2>
-                <p style="margin-bottom: 20px; color: #666;">Already have a judgment? See if a proposal was effective.</p>
+                <h2>Post-Judgment Calculator</h2>
+                <p>Already have a judgment? See if a proposal was effective.</p>
                 <form id="pfsForm">
-                    <div class="form-group">
-                        <label>Who made the proposal?</label>
+                    <fieldset class="form-group">
+                        <legend>Who made the proposal?</legend>
                         <div class="radio-group">
                             <label class="radio-label">
                                 <input type="radio" name="proposalType" value="plaintiff" required>
@@ -248,21 +252,22 @@
                                 <span>Defendant</span>
                             </label>
                         </div>
-                    </div>
+                    </fieldset>
                     <div class="form-group">
                         <label for="proposalAmount">Proposal Amount ($)</label>
-                        <input type="text" id="proposalAmount" required placeholder="$100,000.00">
+                        <input type="text" id="proposalAmount" required placeholder="$100,000.00" aria-describedby="pfsError">
                     </div>
 
                     <div class="form-group">
                         <label for="judgmentAmount">Final Judgment Amount ($)</label>
-                        <input type="text" id="judgmentAmount" required placeholder="$150,000.00">
+                        <input type="text" id="judgmentAmount" required placeholder="$150,000.00" aria-describedby="pfsError">
                     </div>
 
                     <button type="submit" class="calculate-btn">Calculate</button>
+                    <div id="pfsError" class="form-error" role="alert" style="display:none;"></div>
                 </form>
 
-                <div id="results" class="results hidden">
+                <div id="results" class="results hidden" aria-live="polite" role="region" aria-label="Post-judgment calculator results">
                     <!-- Results will appear here -->
                 </div>
             </div>
@@ -270,99 +275,99 @@
         </main>
 
         <!-- About Section - SEO Content -->
-        <div id="how-it-works" style="background: #f8f9fa; padding: 40px 30px; margin-top: 40px;">
-            <div style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
-                <h2 style="color: #1e3a5f; margin-bottom: 25px; font-size: 2rem; text-align: center;">Understanding Florida Statute 768.79</h2>
+        <div id="how-it-works" class="seo-section">
+            <div class="seo-section-inner">
+                <h2>Understanding Florida Statute 768.79</h2>
                 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">How It Works</h3>
-                <p style="margin-bottom: 15px;"><a href="https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&Search_String=&URL=0700-0799/0768/Sections/0768.79.html" target="_blank" rel="noopener noreferrer" style="color: #2c5282;">Florida Statute § 768.79</a> allows the party making a proposal for settlement to recover attorney's fees if the final judgment meets certain thresholds:</p>
-                <ul style="margin-left: 25px; margin-bottom: 20px;">
-                    <li style="margin-bottom: 10px;"><strong>Plaintiff's Proposal:</strong> Final judgment must be at least 25% MORE than the proposal amount</li>
-                    <li style="margin-bottom: 10px;"><strong>Defendant's Proposal:</strong> Final judgment must be at least 25% LESS than the proposal amount</li>
+                <h3>How It Works</h3>
+                <p><a href="https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&Search_String=&URL=0700-0799/0768/Sections/0768.79.html" target="_blank" rel="noopener noreferrer">Florida Statute § 768.79</a> allows the party making a proposal for settlement to recover attorney's fees if the final judgment meets certain thresholds:</p>
+                <ul>
+                    <li><strong>Plaintiff's Proposal:</strong> Final judgment must be at least 25% MORE than the proposal amount</li>
+                    <li><strong>Defendant's Proposal:</strong> Final judgment must be at least 25% LESS than the proposal amount</li>
                 </ul>
-                <p style="margin-bottom: 20px;">This calculator helps determine if your proposal meets the statutory threshold for fee recovery.</p>
+                <p>This calculator helps determine if your proposal meets the statutory threshold for fee recovery.</p>
 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Understanding Proposal for Settlement</h3>
-                <p style="margin-bottom: 15px;">
+                <h3>Understanding Proposal for Settlement</h3>
+                <p>
                     Florida Statute 768.79 provides a powerful tool for parties in civil litigation to encourage settlement and manage litigation risk. When properly utilized, proposals for settlement can result in the recovery of attorney's fees and costs from the date of service of the proposal, even if the proposing party doesn't ultimately prevail on all claims.
                 </p>
 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">The 25% Threshold Explained</h3>
-                <p style="margin-bottom: 15px;">
+                <h3>The 25% Threshold Explained</h3>
+                <p>
                     The key to a successful proposal for settlement is the 25% rule. For plaintiffs, the final judgment must be at least 25% more favorable than what they proposed. For defendants, the judgment must be at least 25% more favorable than what they offered. Our calculator instantly determines whether this threshold is met, helping Florida attorneys evaluate their proposals quickly and accurately.
                 </p>
 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Rule 1.442 Compliance Requirements</h3>
-                <p style="margin-bottom: 15px;">
+                <h3>Rule 1.442 Compliance Requirements</h3>
+                <p>
                     While this calculator determines if the 25% threshold is met under Florida Statute 768.79, a valid proposal for settlement must also comply with the procedural requirements of Florida Rule of Civil Procedure 1.442. Both the statute and the rule must be satisfied for fee recovery.
                 </p>
 
-                <h4 style="color: #2c5282; margin-top: 25px; margin-bottom: 12px; font-size: 1.2rem;">Key Rule 1.442 Requirements:</h4>
-                <ul style="margin-left: 25px; margin-bottom: 20px;">
-                    <li style="margin-bottom: 10px;"><strong>Timing:</strong> Must be served at least 45 days before the first day of trial (unless less time exists due to scheduling)</li>
-                    <li style="margin-bottom: 10px;"><strong>Form:</strong> Must be in writing and state that it is made pursuant to Florida Rule 1.442</li>
-                    <li style="margin-bottom: 10px;"><strong>Specificity:</strong> Must state with particularity the amount offered and whether it includes attorneys' fees and costs already incurred</li>
-                    <li style="margin-bottom: 10px;"><strong>Service:</strong> Must be properly served on the opposing party or their attorney of record</li>
-                    <li style="margin-bottom: 10px;"><strong>Scope:</strong> Must resolve all claims in the action (cannot be for a single claim unless it's the only claim)</li>
-                    <li style="margin-bottom: 10px;"><strong>No Admission:</strong> Making a proposal is not an admission of liability or the value of damages</li>
+                <h4>Key Rule 1.442 Requirements:</h4>
+                <ul>
+                    <li><strong>Timing:</strong> Must be served at least 45 days before the first day of trial (unless less time exists due to scheduling)</li>
+                    <li><strong>Form:</strong> Must be in writing and state that it is made pursuant to Florida Rule 1.442</li>
+                    <li><strong>Specificity:</strong> Must state with particularity the amount offered and whether it includes attorneys' fees and costs already incurred</li>
+                    <li><strong>Service:</strong> Must be properly served on the opposing party or their attorney of record</li>
+                    <li><strong>Scope:</strong> Must resolve all claims in the action (cannot be for a single claim unless it's the only claim)</li>
+                    <li><strong>No Admission:</strong> Making a proposal is not an admission of liability or the value of damages</li>
                 </ul>
 
-                <p style="margin-bottom: 20px; padding: 15px; background: #d1ecf1; border-left: 4px solid #0c5460; border-radius: 4px; color: #0c5460;">
-                    <strong>💡 Practice Tip:</strong> Always consult Florida Rule 1.442 and recent case law when drafting proposals. This calculator determines mathematical compliance with the 25% threshold, but procedural compliance with Rule 1.442 is equally critical for fee recovery. Consider using standardized form language that specifically references both the statute and the rule.
+                <p class="practice-tip">
+                    <strong><span aria-hidden="true">💡</span> Practice Tip:</strong> Always consult Florida Rule 1.442 and recent case law when drafting proposals. This calculator determines mathematical compliance with the 25% threshold, but procedural compliance with Rule 1.442 is equally critical for fee recovery. Consider using standardized form language that specifically references both the statute and the rule.
                 </p>
 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Who Should Use This Calculator?</h3>
-                <ul style="margin-left: 25px; margin-bottom: 20px;">
-                    <li style="margin-bottom: 8px;">Florida litigation attorneys planning settlement strategy</li>
-                    <li style="margin-bottom: 8px;">Paralegals analyzing proposal for settlement outcomes</li>
-                    <li style="margin-bottom: 8px;">Law firms evaluating fee recovery potential</li>
-                    <li style="margin-bottom: 8px;">Insurance defense counsel assessing settlement positions</li>
-                    <li style="margin-bottom: 8px;">Plaintiff's attorneys maximizing recovery opportunities</li>
-                    <li style="margin-bottom: 8px;">Legal students studying Florida civil procedure</li>
+                <h3>Who Should Use This Calculator?</h3>
+                <ul>
+                    <li>Florida litigation attorneys planning settlement strategy</li>
+                    <li>Paralegals analyzing proposal for settlement outcomes</li>
+                    <li>Law firms evaluating fee recovery potential</li>
+                    <li>Insurance defense counsel assessing settlement positions</li>
+                    <li>Plaintiff's attorneys maximizing recovery opportunities</li>
+                    <li>Legal students studying Florida civil procedure</li>
                 </ul>
 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Three Powerful Calculators in One</h3>
-                <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px;">
-                    <p style="margin-bottom: 15px;"><strong>1. Proposal Calculator:</strong> Plan your strategy by entering an expected judgment amount to determine what proposal amount will trigger fee recovery. Perfect for strategic planning before serving proposals.</p>
-                    <p style="margin-bottom: 15px;"><strong>2. Judgment Calculator:</strong> Already made a proposal? Enter your proposal amount to see what judgment is needed to meet the 25% threshold and recover fees.</p>
-                    <p style="margin-bottom: 0;"><strong>3. Post-Judgment Calculator:</strong> After verdict or judgment, instantly verify whether your proposal was effective and calculate the exact percentage difference.</p>
+                <h3>Three Powerful Calculators in One</h3>
+                <div class="calculator-card">
+                    <p><strong>1. Proposal Calculator:</strong> Plan your strategy by entering an expected judgment amount to determine what proposal amount will trigger fee recovery. Perfect for strategic planning before serving proposals.</p>
+                    <p><strong>2. Judgment Calculator:</strong> Already made a proposal? Enter your proposal amount to see what judgment is needed to meet the 25% threshold and recover fees.</p>
+                    <p><strong>3. Post-Judgment Calculator:</strong> After verdict or judgment, instantly verify whether your proposal was effective and calculate the exact percentage difference.</p>
                 </div>
 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Why Florida Attorneys Use This Calculator</h3>
-                <ul style="margin-left: 25px; margin-bottom: 20px;">
-                    <li style="margin-bottom: 10px;"><strong>Instant Calculations:</strong> No more manual math or spreadsheet errors - get accurate results in seconds</li>
-                    <li style="margin-bottom: 10px;"><strong>Strategic Planning:</strong> Determine optimal proposal amounts before serving proposals to maximize fee recovery potential</li>
-                    <li style="margin-bottom: 10px;"><strong>Post-Trial Verification:</strong> Quickly verify fee entitlement after judgment and prepare fee motions</li>
-                    <li style="margin-bottom: 10px;"><strong>Client Communication:</strong> Show clients precise calculations and explain settlement leverage in clear terms</li>
-                    <li style="margin-bottom: 10px;"><strong>Case Evaluation:</strong> Assess settlement risk and potential fee recovery to make informed litigation decisions</li>
-                    <li style="margin-bottom: 10px;"><strong>100% Free:</strong> No subscription fees, no login required - professional calculations available to all Florida attorneys</li>
+                <h3>Why Florida Attorneys Use This Calculator</h3>
+                <ul>
+                    <li><strong>Instant Calculations:</strong> No more manual math or spreadsheet errors - get accurate results in seconds</li>
+                    <li><strong>Strategic Planning:</strong> Determine optimal proposal amounts before serving proposals to maximize fee recovery potential</li>
+                    <li><strong>Post-Trial Verification:</strong> Quickly verify fee entitlement after judgment and prepare fee motions</li>
+                    <li><strong>Client Communication:</strong> Show clients precise calculations and explain settlement leverage in clear terms</li>
+                    <li><strong>Case Evaluation:</strong> Assess settlement risk and potential fee recovery to make informed litigation decisions</li>
+                    <li><strong>100% Free:</strong> No subscription fees, no login required - professional calculations available to all Florida attorneys</li>
                 </ul>
 
-                <h3 style="color: #2c5282; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Common Questions About Florida 768.79</h3>
+                <h3>Common Questions About Florida 768.79</h3>
                 
-                <div style="margin-bottom: 25px;">
-                    <p style="margin-bottom: 8px; font-weight: 600; color: #1e3a5f;">When can I recover attorney's fees under 768.79?</p>
-                    <p style="margin-left: 20px; margin-bottom: 20px;">
+                <div class="faq-block">
+                    <p class="faq-question">When can I recover attorney's fees under 768.79?</p>
+                    <p class="faq-answer">
                         You can recover reasonable attorney's fees from the date you served your proposal for settlement through entry of judgment if the final judgment meets or exceeds the 25% threshold. The fees must be reasonable and necessary, and courts will review fee petitions for excessiveness.
                     </p>
 
-                    <p style="margin-bottom: 8px; font-weight: 600; color: #1e3a5f;">Does the 25% threshold apply to both plaintiffs and defendants?</p>
-                    <p style="margin-left: 20px; margin-bottom: 20px;">
+                    <p class="faq-question">Does the 25% threshold apply to both plaintiffs and defendants?</p>
+                    <p class="faq-answer">
                         Yes, but in opposite directions. Plaintiffs must obtain a judgment at least 25% higher than their proposal. Defendants must achieve a judgment at least 25% lower than their offer. Our calculator handles both scenarios automatically based on who made the proposal.
                     </p>
 
-                    <p style="margin-bottom: 8px; font-weight: 600; color: #1e3a5f;">What happens if I serve multiple proposals?</p>
-                    <p style="margin-left: 20px; margin-bottom: 20px;">
+                    <p class="faq-question">What happens if I serve multiple proposals?</p>
+                    <p class="faq-answer">
                         Generally, the most recent proposal controls for purposes of fee entitlement under Florida law. Use our calculator to evaluate each proposal separately to determine which provides the best fee recovery opportunity based on expected judgment amounts.
                     </p>
 
-                    <p style="margin-bottom: 8px; font-weight: 600; color: #1e3a5f;">Does this calculator check Rule 1.442 compliance?</p>
-                    <p style="margin-left: 20px; margin-bottom: 20px;">
+                    <p class="faq-question">Does this calculator check Rule 1.442 compliance?</p>
+                    <p class="faq-answer">
                         This calculator checks whether the 25% threshold under Florida Statute 768.79 is met. However, a valid proposal must also comply with Florida Rule of Civil Procedure 1.442, which governs timing (45 days before trial), form (written and stating it's under Rule 1.442), specificity (amount and whether fees/costs are included), and scope (must resolve all claims). Both the statute and rule requirements must be satisfied for fee recovery.
                     </p>
 
-                    <p style="margin-bottom: 8px; font-weight: 600; color: #1e3a5f;">Can I use this for federal court cases?</p>
-                    <p style="margin-left: 20px; margin-bottom: 0;">
+                    <p class="faq-question">Can I use this for federal court cases?</p>
+                    <p class="faq-answer">
                         This calculator is specifically for Florida Statute 768.79, which applies in Florida state courts. Federal courts have different rules for offers of judgment under Federal Rule of Civil Procedure 68, which does not include attorney's fees provisions except where otherwise provided by law.
                     </p>
                 </div>
@@ -373,12 +378,12 @@
             <div class="support-section">
                 <p>Find this tool helpful?</p>
                 <a href="https://www.buymeacoffee.com/ctibs" target="_blank" rel="noopener noreferrer" class="coffee-btn">
-                    ☕ Buy Me a Coffee
+                    <span aria-hidden="true">☕</span> Buy Me a Coffee
                 </a>
             </div>
 
            <div class="disclaimer" id="disclaimer">
-                <h3>⚠️ Important Disclaimer</h3>
+                <h3><span aria-hidden="true">⚠️</span> Important Disclaimer</h3>
                 <p><strong>This calculator is for informational purposes only and does not constitute legal advice.</strong> The calculations provided are estimates based on Florida Statute § 768.79 as understood at the time of creation. Users should:</p>
                 <ul>
                     <li>Verify all calculations independently</li>
@@ -395,13 +400,13 @@
                 <a href="/terms-of-service.html">Terms of Service</a>
                 <a href="/about.html">About &amp; Contact</a>
             </div>
-            <div class="footer-links" style="margin-top: 10px;">
+            <div class="footer-links footer-links-secondary">
                 <strong>More Free Legal Tools:</strong>
                 <a href="https://batesstamp.com" target="_blank" rel="noopener noreferrer">Bates Stamp Tool - Free PDF Document Numbering</a>
             </div>
 
-            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
-                <p style="font-size: 0.9rem; color: #666; line-height: 1.6; text-align: center;">
+            <div class="footer-seo">
+                <p>
                     <strong>Florida Legal Resources:</strong> Proposal for Settlement, 768.79 Calculator, Attorney Fees Florida, 
                     PFS Calculator, Florida Litigation Tools, Settlement Strategy, Fee Recovery, Florida Civil Procedure, 
                     Legal Fee Calculator, Florida Bar Resources
@@ -412,6 +417,6 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
